@@ -1,12 +1,31 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --rich-black: #0D1B2A;
+    --oxford-blue: #1B263B;
+    --yln-blue: #415A77;
+    --silver-lake-blue: #778DA9;
+    --platinum: #E0E1DD;
+
+    --base: var(--rich-black);
+    --color: var(--platinum);
+    --primary: var(--oxford-blue);
+    --secondary: var(--yln-blue);
+    --accent: var(--silver-lake-blue);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0D1B2A;
-    --foreground: #E0E1DD;
+    /* https://coolors.co/palette/0d1b2a-1b263b-415a77-778da9-e0e1dd */
+    --rich-black: #0D1B2A;
+    --oxford-blue: #1B263B;
+    --yln-blue: #415A77;
+    --silver-lake-blue: #778DA9;
+    --platinum: #E0E1DD;
+
+    --base: var(--rich-black);
+    --color: var(--platinum);
+    --primary: var(--oxford-blue);
+    --secondary: var(--yln-blue);
+    --accent: var(--silver-lake-blue);
   }
 }
 
@@ -23,8 +42,8 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--color);
+  background: var(--base);
 
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -1,7 +1,41 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 1280px) 1fr;
+}
+
 .page {
   min-height: 100vh;
   min-height: 100dvh;
 
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.header {
+  background-color: var(--primary);
+  border-bottom: 1px solid var(--secondary);
+}
+
+.headerContent {
+  grid-column: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .5rem;
+}
+
+.footer {
+  background-color: var(--primary);
+  border-top: 1px solid var(--secondary);
+}
+
+.footerContent {
+  grid-column: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .5rem;
 }
