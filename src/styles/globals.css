@@ -1,15 +1,20 @@
 :root {
-    --rich-black: #0D1B2A;
-    --oxford-blue: #1B263B;
-    --yln-blue: #415A77;
-    --silver-lake-blue: #778DA9;
-    --platinum: #E0E1DD;
+  --rich-black: #0D1B2A;
+  --oxford-blue: #1B263B;
+  --yln-blue: #415A77;
+  --silver-lake-blue: #778DA9;
+  --platinum: #E0E1DD;
+  --olive-green: #90AC53;
+  --fern-green: #7f9847;
 
-    --base: var(--rich-black);
-    --color: var(--platinum);
-    --primary: var(--oxford-blue);
-    --secondary: var(--yln-blue);
-    --accent: var(--silver-lake-blue);
+  --base: var(--rich-black);
+  --base-700: var(--oxford-blue);
+  --base-500: var(--yln-blue);
+  --base-300: var(--silver-lake-blue);
+
+  --color: var(--platinum);
+  --primary: var(--olive-green);
+  --primary-hover: var(--fern-green);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,12 +25,21 @@
     --yln-blue: #415A77;
     --silver-lake-blue: #778DA9;
     --platinum: #E0E1DD;
+    --olive-green: #90AC53;
+    --fern-green: #7f9847;
 
     --base: var(--rich-black);
+    --base-700: var(--oxford-blue);
+    --base-500: var(--yln-blue);
+    --base-300: var(--silver-lake-blue);
+
     --color: var(--platinum);
-    --primary: var(--oxford-blue);
-    --secondary: var(--yln-blue);
-    --accent: var(--silver-lake-blue);
+    --primary: var(--olive-green);
+    --primary-hover: var(--fern-green);
+  }
+
+  html {
+    color-scheme: dark;
   }
 }
 
@@ -50,8 +64,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+@media(hover) {
+  *:focus {
+    outline: 2px solid var(--color);
   }
 }

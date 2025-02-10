@@ -1,4 +1,8 @@
 {
   "app.name": "Pokerize",
-  "app.coppyright": "© 2025 Aliaksandr Pyrkh"
+  "app.coppyright": "© 2025 Aliaksandr Pyrkh",
+  "app.slogan": "Pokerize: A fun and engaging planning poker tool for Agile teams",
+  "app.features": "No ads. Fast. Easy. Fun.",
+
+  "b.get_started": "Get Started"
 }

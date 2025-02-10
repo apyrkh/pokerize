@@ -9,17 +9,30 @@ export default function Home() {
     <div className={styles.page}>
       <header className={cn(styles.header, styles.container)}>
         <div className={styles.headerContent}>
-          <Link href="/">
-            <Image src="/img/logo.png" alt="Logo" width="100" height="24" />
-          </Link>
-
-          <span>
-            {getText('app.name')} <sup>beta</sup>
-          </span>
+          {getText('app.name')} <sup>beta</sup>
         </div>
       </header>
 
-      <main className={styles.main}>
+      <main className={styles.container}>
+        <div className={styles.main}>
+          <section className={styles.slogan}>
+            <h1>
+              {getText('app.slogan')}
+            </h1>
+          </section>
+
+          <div className={styles.action}>
+            <button type="button" className={styles.btn}>
+              {getText('b.get_started')}
+            </button>
+          </div>
+
+          <section className={styles.features}>
+            <h2>
+              {getText('app.features')}
+            </h2>
+          </section>
+        </div>
       </main>
 
       <footer className={cn(styles.footer, styles.container)}>
@@ -29,7 +42,7 @@ export default function Home() {
           </span>
 
           <Link href="https://github.com/apyrkh/pokerize" target="_blank" rel="noopener noreferrer">
-            <Image src="/img/github-mark-white.png" alt="GitHub" width="15" height="15" />
+            <Image src="/img/github-mark-white.png" alt="GitHub" width="20" height="20" />
           </Link>
         </div>
       </footer>
