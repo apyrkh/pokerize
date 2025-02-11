@@ -1,0 +1,21 @@
+import { cn, getText } from "@/utils";
+import Link from "next/link";
+import Image from "next/image";
+
+import styles from "./footer.module.css";
+
+export const Footer = () => {
+  return (
+    <footer className={cn(styles.footer, 'content')}>
+      <div className={styles.footerContent}>
+        <span>
+          {getText('app.coppyright')}
+        </span>
+
+        <Link href="https://github.com/apyrkh/pokerize" target="_blank" rel="noopener noreferrer">
+          <Image src="/img/github-mark-white.png" alt="GitHub" width="20" height="20" />
+        </Link>
+      </div>
+    </footer>
+  )
+}
