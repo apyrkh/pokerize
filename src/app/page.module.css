@@ -12,7 +12,15 @@
   background-color: var(--base-700);
 }
 
-.mainContent {
+.headerContent {
+  margin-inline: auto;
+  max-width: var(--max-width);
+}
+
+.main {
+  margin-inline: auto;
+  max-width: var(--max-width);
+
   place-content: center;
 }
 

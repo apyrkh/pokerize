@@ -1,4 +1,4 @@
-import { cn, getText } from "@/utils";
+import { getText } from "@/utils";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,7 +6,7 @@ import styles from "./footer.module.css";
 
 export const Footer = () => {
   return (
-    <footer className={cn(styles.footer, 'content')}>
+    <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <span>
           {getText('app.coppyright')}

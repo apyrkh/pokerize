@@ -5,6 +5,9 @@
 }
 
 .footerContent {
+  margin-inline: auto;
+  max-width: var(--max-width);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
