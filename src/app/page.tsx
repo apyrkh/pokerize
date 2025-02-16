@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { getText } from "@/utils";
+import { GetStartedButton } from "@/components/button";
 
 import styles from "./page.module.css";
 
@@ -20,9 +21,7 @@ export default function Home() {
         </section>
 
         <div className={styles.action}>
-          <button type="button" className={styles.btn}>
-            {getText('b.get_started')}
-          </button>
+          <GetStartedButton />
         </div>
 
         <section className={styles.features}>
