@@ -13,7 +13,14 @@ export const Footer = () => {
         </span>
 
         <Link href="https://github.com/apyrkh/pokerize" target="_blank" rel="noopener noreferrer">
-          <Image src="/img/github-mark-white.png" alt="GitHub" width="20" height="20" />
+          <Image 
+            src="/img/github-mark-white.png" 
+            alt="GitHub" 
+            width="20" 
+            height="20"
+            priority={true} 
+            placeholder="empty" 
+          />
         </Link>
       </div>
     </footer>
