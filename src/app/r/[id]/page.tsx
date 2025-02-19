@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
       <header className={styles.header}>
         <div className={styles.headerContent}>
           <Link href="/" className={styles.link}>
-            {getText('app.name')} <sup>beta</sup>
+            {getText('app.name')} <sup>alpha</sup>
           </Link>
         </div>
       </header>

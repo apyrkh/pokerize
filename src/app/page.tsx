@@ -9,7 +9,7 @@ export default function Home() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          {getText('app.name')} <sup>beta</sup>
+          {getText('app.name')} <sup>alpha</sup>
         </div>
       </header>
 
