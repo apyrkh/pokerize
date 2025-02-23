@@ -14,19 +14,21 @@ datasource db {
 }
 
 model Room {
-  id          String   @id @default(cuid())
-  description String?
-  players     Player[]
-  createdAt   DateTime @default(now())
+  id            String   @id @default(cuid())
+  name          String?
+  players       Player[]
+  votesRevealed Boolean  @default(false)
+  createdAt     DateTime @default(now())
 }
 
 model Player {
-  id      String  @id @default(cuid())
-  name    String?
-  role    Role
-  vote    String?
-  roomId  String?
-  Room    Room?   @relation(fields: [roomId], references: [id])
+  id       String  @id @default(cuid())
+  roomId   String
+  room     Room    @relation(fields: [roomId], references: [id])
+  userId   String
+  userName String?
+  role     Role
+  vote     String?
 }
 
 enum Role {

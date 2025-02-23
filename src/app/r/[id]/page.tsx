@@ -7,8 +7,8 @@ import styles from './page.module.css';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   var { id } = await params;
-  var room = await db.getRoom(id);
 
+  var room = await db.getRoom(id);
   (room === null && notFound());
 
   return (
