@@ -13,7 +13,7 @@ export var db = {
     });
   },
   createRoom: () => {
-    return prisma.room.create({ data: {} });
+    return prisma.room.create({ data: {}, include: { players: true } });
   },
 
   getPlayerByRoomIdAndUserId: (roomId: string, userId: string) => {
