@@ -1,4 +1,4 @@
-import { db } from '@/db-client';
+import { db, roomToDto } from '@/db';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
@@ -12,7 +12,7 @@ export async function POST() {
 
     var room = await db.createRoom();
 
-    return NextResponse.json(room, { status: 201 });
+    return NextResponse.json(roomToDto(room), { status: 201 });
   } catch (error) {
     console.error('Failed to create room', error);
 

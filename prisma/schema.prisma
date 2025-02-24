@@ -29,6 +29,8 @@ model Player {
   userName String?
   role     Role
   vote     String?
+
+  @@unique([roomId, userId])
 }
 
 enum Role {
