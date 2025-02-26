@@ -1,5 +1,7 @@
+"use client";
+
 import { RoomDto } from '@/api-dtos';
-import { cn } from '@/utils';
+import { PlayerSlot } from './player-slot';
 
 import styles from './room.module.css';
 
@@ -8,29 +10,29 @@ type RoomProps = {
 }
 
 export var Room = ({ room }: RoomProps) => {
+  var players = room.players;
+
   return (
     <div className={styles.room} >
       <div className={styles.title}>{room.name ?? room.id}</div>
 
       <div className={styles.stage}>
         <div />
-        <div className={styles.player}></div>
-        <div className={cn(styles.player, styles.active)}>
-          Aliaks
-        </div>
-        <div className={styles.player}></div>
-        <div className={styles.player}></div>
+        <PlayerSlot player={players[4]}/>
+        <PlayerSlot player={players[0]} />
+        <PlayerSlot player={players[1]}/>
+        <PlayerSlot player={players[5]}/>
         <div />
 
-        <div className={styles.player}></div>
+        <PlayerSlot player={players[8]}/>
         <div className={styles.board}></div>
-        <div className={styles.player}></div>
+        <PlayerSlot player={players[9]}/>
 
         <div />
-        <div className={styles.player}></div>
-        <div className={styles.player}></div>
-        <div className={styles.player}></div>
-        <div className={styles.player}></div>
+        <PlayerSlot player={players[7]}/>
+        <PlayerSlot player={players[3]} />
+        <PlayerSlot player={players[2]}/>
+        <PlayerSlot player={players[6]}/>
         <div />
       </div>
     </div>

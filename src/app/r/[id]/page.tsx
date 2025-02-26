@@ -34,7 +34,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     })
     // room = await db.getRoom(id);
   }
-  console.log(room);
 
 
   return (
