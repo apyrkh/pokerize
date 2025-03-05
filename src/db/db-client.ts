@@ -16,7 +16,7 @@ export var db = {
     return prisma.room.create({ data: {}, include: { players: true } });
   },
 
-  getPlayerByRoomIdAndUserId: (roomId: string, userId: string) => {
+  getPlayer: (roomId: string, userId: string) => {
     return prisma.player.findUnique({
       where: {
         roomId_userId: {
@@ -26,7 +26,11 @@ export var db = {
       },
     });
   },
-  createPlayer: ({ roomId, userId, userName, role }: { roomId: string, userId: string, userName: string, role?: Role }) => {
-    return prisma.player.create({ data: { roomId, userId, userName, role: role ?? Role.VIEWER } })
+  upsertPlayer: ({ roomId, userId, userName, role }: { roomId: string, userId: string, userName: string, role?: Role }) => {
+    return prisma.player.upsert({
+      where: { roomId_userId: { roomId, userId } },
+      create: { roomId, userId, userName, role: role ?? Role.USER },
+      update: { userName, role: role ?? Role.USER },
+    });
   }
 }

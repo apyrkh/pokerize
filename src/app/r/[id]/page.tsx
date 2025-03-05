@@ -1,8 +1,9 @@
+import { UserDto } from '@/api-dtos';
 import { db, roomToDto } from '@/db';
-import { cn, getText } from '@/utils';
+import { getText } from '@/utils';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, unauthorized } from 'next/navigation';
 import { Room } from './room';
 
 import styles from './page.module.css';
@@ -19,22 +20,11 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   var uuidCookie = cookieStore.get('uuid');
   var userId = uuidCookie?.value;
   if (!userId) {
-    return notFound();
+    return unauthorized();
   }
-
-  var player = room.players.find((it) => it.userId === userId);
-  if (!player) {
-    var uNameCookie = cookieStore.get('uName');
-    var userName = uNameCookie?.value;
-
-    player = await db.createPlayer({
-      roomId: room.id,
-      userId,
-      userName: userName ?? 'Unnamed',
-    })
-    // room = await db.getRoom(id);
-  }
-
+  var uNameCookie = cookieStore.get('uName');
+  var userName = uNameCookie?.value ?? '';
+  var currentUser: UserDto = { id: userId, name: userName };
 
   return (
     <div className={styles.page}>
@@ -46,7 +36,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
       </header>
 
-        <Room room={roomToDto(room)} />
+      <Room room={roomToDto(room)} user={currentUser} />
     </div>
   )
 }

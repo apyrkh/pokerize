@@ -16,7 +16,6 @@
 
   --color: var(--platinum);
   --primary: var(--olive-green);
-  --primary-hover: var(--fern-green);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,7 +36,6 @@
 
     --color: var(--platinum);
     --primary: var(--olive-green);
-    --primary-hover: var(--fern-green);
   }
 
   html {

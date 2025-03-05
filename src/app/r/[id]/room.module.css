@@ -1,4 +1,5 @@
 .room {
+  position: relative;
   padding-block: 1rem;
   gap: 1rem;
   display: grid;
@@ -19,7 +20,6 @@
   --row-max-height: 150px;
 
   height: min(calc(3 * var(--row-max-height) + 2 * var(--gap)), 100%);
-
   display: grid;
   grid-template-columns:
     repeat(6, minmax(var(--col-min-width), var(--col-max-width)));

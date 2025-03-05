@@ -15,7 +15,12 @@ export type PlayerDto = {
 
 export type PlayerRoleDto = (typeof PlayerRole)[keyof typeof PlayerRole];
 
-export const PlayerRole = {
+export var PlayerRole = {
   USER: 'USER',
   VIEWER: 'VIEWER',
-};
+} as const;
+
+export type UserDto = {
+  id: string;
+  name: string;
+}

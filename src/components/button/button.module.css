@@ -21,7 +21,7 @@
     &:active,
     &:focus,
     &:hover {
-      background-color: var(--primary-hover);
+      background-color: hsl(from var(--primary) h s l / 0.8);
     }
   }
 }
