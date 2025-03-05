@@ -2,9 +2,9 @@ import { PlayerRole, UserDto } from '@/api-dtos';
 import { db, playerToDto } from '@/db';
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request, { params }: { params: { roomId: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ roomId: string }> }) {
   try {
-    var { roomId } = params;
+    var { roomId } = await params;
     var user: UserDto = await req.json();
 
     var player = await db.upsertPlayer({
