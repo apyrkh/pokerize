@@ -6,7 +6,7 @@ import "@/styles/reset.css";
 import "@/styles/globals.css";
 
 
-export const metadata: Metadata = {
+export var metadata: Metadata = {
   title: getText('app.name'),
   description: getText('app.slogan'),
 };

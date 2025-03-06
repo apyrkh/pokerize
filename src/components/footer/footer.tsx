@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import styles from "./footer.module.css";
 
-export const Footer = () => {
+export var Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
