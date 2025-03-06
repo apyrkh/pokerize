@@ -5,6 +5,7 @@ import { PlayerEntryGate } from './player-entry-gate';
 import { PlayerSlot } from './player-slot';
 
 import styles from './room.module.css';
+import { useEffect } from 'react';
 
 type RoomProps = {
   room: RoomDto;
@@ -14,7 +15,33 @@ type RoomProps = {
 export var Room = ({ room, user }: RoomProps) => {
   var players = room.players;
 
-  var hasPlayer = players.some((it) => it.userId === user.id);
+  var isJoint = players.some((it) => it.userId === user.id);
+
+  useEffect(() => {
+    var eventSource = new EventSource(`/api/room/${room.id}/subscribe`);
+
+    eventSource.onopen = () => {
+      console.log('SSE connection opened');
+
+    };
+
+    eventSource.onmessage = (event: MessageEvent) => {
+      console.log('SSE message received:', JSON.parse(event.data));
+    }
+
+    eventSource.onerror = (err) => {
+      if (eventSource.readyState === EventSource.CLOSED) {
+        console.log('SSE connection closed by server');
+      } else {
+        console.error('SSE error:', err);
+        eventSource.close();
+      }
+    };
+
+    return () => {
+      eventSource.close();
+    }
+  }, []);
 
   return (
     <div className={styles.room} >
@@ -40,7 +67,7 @@ export var Room = ({ room, user }: RoomProps) => {
         <div />
       </div>
 
-      {!hasPlayer &&
+      {!isJoint &&
         <PlayerEntryGate roomId={room.id} user={user} />
       }
     </div>
