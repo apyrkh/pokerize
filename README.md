@@ -7,10 +7,6 @@ Pokerize: The Planning Poker App
 - `npm i`
 - `npm run dev`
 
-## Prisma
+## Supabase
 
-- `npx prisma generate`
-- `npx prisma migrate dev --name init`
-- `npx prisma migrate deploy`
-
-- `npx prisma db pull`
+- `npx supabase gen types typescript --project-id "$PROJECT_ID" --schema public > src/db/db-types.ts`

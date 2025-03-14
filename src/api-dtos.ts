@@ -1,9 +1,11 @@
+export type DateString = string;
+
 export type RoomDto = {
   id: string;
   name: string | null;
   players: PlayerDto[];
   votesRevealed: boolean;
-  createdAt: Date;
+  createdAt: DateString;
 }
 
 export type PlayerDto = {
