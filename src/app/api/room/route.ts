@@ -1,4 +1,4 @@
-import { db, roomToDto } from '@/db';
+import { db, roomToDto } from '@/backend';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
@@ -11,6 +11,9 @@ export async function POST() {
     // @TODO: MVP restriction
 
     var room = await db.createRoom();
+    if (!room) {
+      throw new Error('Failed to create room');
+    }
 
     return NextResponse.json(roomToDto(room), { status: 201 });
   } catch (error) {

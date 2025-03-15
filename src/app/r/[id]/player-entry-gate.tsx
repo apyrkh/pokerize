@@ -1,9 +1,9 @@
 "use client";
+import { api } from '@/api-client';
+import { UserDto } from '@/backend';
 import { useState } from 'react';
-import { UserDto } from '@/api-dtos';
 
 import styles from './player-entry-gate.module.css'
-import { api } from '@/api-client';
 
 type PlayerEntryGateProps = {
   roomId: string;

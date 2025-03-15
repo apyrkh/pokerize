@@ -1,3 +1,9 @@
+-- cleanup DB
+drop table if exists "player";
+drop table if exists "room";
+drop type if exists "player_role";
+
+-- init DB
 create extension if not exists "pgcrypto";
 
 create table "room" (

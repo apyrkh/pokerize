@@ -1,5 +1,4 @@
-import { UserDto } from '@/api-dtos';
-import { db, roomToDto } from '@/db';
+import { db, roomToDto, UserDto } from '@/backend';
 import { getText } from '@/utils';
 import { cookies } from 'next/headers';
 import Link from 'next/link';

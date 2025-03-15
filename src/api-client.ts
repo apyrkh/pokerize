@@ -1,4 +1,4 @@
-import { PlayerDto, RoomDto, UserDto } from './api-dtos';
+import { PlayerDto, RoomDto, UserDto } from './backend';
 
 export var api = {
   createRoom: async (): Promise<RoomDto> => {

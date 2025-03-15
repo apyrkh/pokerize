@@ -1,6 +1,6 @@
 "use client";
 
-import { RoomDto, UserDto } from '@/api-dtos';
+import { RoomDto, UserDto } from '@/backend';
 import { PlayerEntryGate } from './player-entry-gate';
 import { PlayerSlot } from './player-slot';
 

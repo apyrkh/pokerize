@@ -1,5 +1,4 @@
-import { PlayerRole, UserDto } from '@/api-dtos';
-import { db, playerToDto } from '@/db';
+import { db, PlayerRole, playerToDto, UserDto } from '@/backend';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request, { params }: { params: Promise<{ roomId: string }> }) {
@@ -13,6 +12,9 @@ export async function POST(req: Request, { params }: { params: Promise<{ roomId:
       userName: user.name,
       role: PlayerRole.USER,
     });
+    if (!player) {
+      throw new Error('Failed to join room');
+    }
 
     var res = NextResponse.json(playerToDto(player), { status: 201 });
     res.cookies.set('uName', user.name, {
@@ -25,8 +27,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ roomId:
 
     return res;
   } catch (error) {
-    console.error('Failed to create room', error);
+    console.error('Failed to join room', error);
 
-    return NextResponse.json({ error: 'Failed to create room' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to join room' }, { status: 500 });
   }
 }

@@ -1,5 +1,5 @@
-import { PlayerDto } from "@/api-dtos"
-import { cn } from "@/utils";
+import { PlayerDto } from '@/backend'
+import { cn } from '@/utils';
 
 import styles from './player-slot.module.css';
 
