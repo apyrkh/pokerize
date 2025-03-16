@@ -1,36 +1,36 @@
--- cleanup DB
-drop table if exists "vote";
-drop table if exists "player";
-drop table if exists "room";
-drop type if exists "player_role";
+-- Cleanup DB
+DROP TABLE IF EXISTS public.vote;
+DROP TABLE IF EXISTS public.player;
+DROP TABLE IF EXISTS public.room;
+DROP TYPE IF EXISTS public.player_role;
 
--- init DB
-create extension if not exists "pgcrypto";
+-- Public
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-create table "room" (
-  id text primary key default encode(gen_random_bytes(4), 'hex'),
-  name text,
-  votes_revealed boolean default false not null,
-  created_at timestamptz default now() not null
+CREATE TABLE public.room (
+  id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
+  name TEXT,
+  votes_revealed BOOLEAN DEFAULT FALSE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now() NOT NULL
 );
 
-create type player_role as enum ('USER', 'VIEWER');
+CREATE TYPE public.player_role AS ENUM ('USER', 'VIEWER');
 
-create table "player" (
-  id text primary key default encode(gen_random_bytes(4), 'hex'),
-  room_id text not null references "room"(id) on delete cascade,
-  user_id text not null,
-  user_name text,
-  role player_role not null,
-  voted boolean default false not null,
-  unique(room_id, user_id)
+CREATE TABLE public.player (
+  id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
+  room_id TEXT NOT NULL REFERENCES public.room(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL,
+  user_name TEXT,
+  role public.player_role NOT NULL,
+  voted BOOLEAN DEFAULT FALSE NOT NULL,
+  UNIQUE(room_id, user_id)
 );
 
-create table "vote" (
-  id text primary key default encode(gen_random_bytes(4), 'hex'),
-  room_id text not null references "room"(id) on delete cascade,
-  player_id text not null references "player"(id) on delete cascade,
-  vote text,
-  revealed boolean default false not null,
-  unique(player_id) -- 1 vote per player
+CREATE TABLE public.vote (
+  id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
+  room_id TEXT NOT NULL REFERENCES public.room(id) ON DELETE CASCADE,
+  player_id TEXT NOT NULL REFERENCES public.player(id) ON DELETE CASCADE,
+  vote TEXT,
+  revealed BOOLEAN DEFAULT FALSE NOT NULL,
+  UNIQUE(player_id) -- 1 vote per player
 );
