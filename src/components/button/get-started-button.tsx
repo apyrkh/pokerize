@@ -24,7 +24,7 @@ export var GetStartedButton = () => {
 
   return (
     <Button type="button" onClick={handleGetStarted} disabled={loading}>
-      {getText('b.get_started')}
+      {getText('b.start_planing')}
     </Button>
   )
 }

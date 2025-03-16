@@ -12,7 +12,7 @@ export type PlayerDto = {
   userId: string;
   userName: string | null;
   role: PlayerRoleDto;
-  vote: string | null;
+  voted: boolean;
 }
 
 export type PlayerRoleDto = (typeof PlayerRole)[keyof typeof PlayerRole];

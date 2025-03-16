@@ -1,4 +1,5 @@
-import { db, roomToDto, UserDto } from '@/backend';
+import { db } from '@/backend';
+import { roomToDto, UserDto } from '@/model';
 import { getText } from '@/utils';
 import { cookies } from 'next/headers';
 import Link from 'next/link';

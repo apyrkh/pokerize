@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { RoomDto, UserDto } from '@/backend';
+import { api } from '@/api-client';
+import { playerToDto, RoomDto, UserDto } from '@/model';
+import { useEffect, useState } from 'react';
 import { PlayerEntryGate } from './player-entry-gate';
 import { PlayerSlot } from './player-slot';
 
 import styles from './room.module.css';
-import { useEffect } from 'react';
 
 type RoomProps = {
   room: RoomDto;
@@ -13,33 +14,25 @@ type RoomProps = {
 }
 
 export var Room = ({ room, user }: RoomProps) => {
-  var players = room.players;
+  var { 0: players, 1: setPlayers } = useState(room.players);
 
   var isJoint = players.some((it) => it.userId === user.id);
 
   useEffect(() => {
-    var eventSource = new EventSource(`/api/room/${room.id}/subscribe`);
-
-    eventSource.onopen = () => {
-      console.log('SSE connection opened');
-
-    };
-
-    eventSource.onmessage = (event: MessageEvent) => {
-      console.log('SSE message received:', JSON.parse(event.data));
-    }
-
-    eventSource.onerror = (err) => {
-      if (eventSource.readyState === EventSource.CLOSED) {
-        console.log('SSE connection closed by server');
-      } else {
-        console.error('SSE error:', err);
-        eventSource.close();
-      }
-    };
-
+    var subscribtion = api.subscribePlayers(room.id, (payload) => {
+      (
+        (payload.eventType === 'INSERT') && 
+          setPlayers((prev) => prev.concat(playerToDto(payload.new)))
+      );
+      // (
+      //   payload.eventType === 'UPDATE' &&
+      //     setPlayers((prev) => prev.map((it) => {
+      //       return it.userId === payload.new.user_id ? playerToDto(payload.new) : it;
+      //     }))
+      // )
+    });
     return () => {
-      eventSource.close();
+      subscribtion.unsubscribe();
     }
   }, []);
 

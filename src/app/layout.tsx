@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import Head from "next/head";
-import { getText } from "@/utils";
+import type { Metadata } from 'next';
+import Head from 'next/head';
+import { getText } from '@/utils';
 
-import "@/styles/reset.css";
-import "@/styles/globals.css";
+import '@/styles/reset.css';
+import '@/styles/globals.css';
 
 
 export var metadata: Metadata = {

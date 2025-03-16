@@ -1,4 +1,5 @@
 import { getText } from '@/utils';
+
 import styles from './not-found.module.css';
 
 export default async function NotFound() {

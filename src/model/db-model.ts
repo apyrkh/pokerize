@@ -16,7 +16,7 @@ export type Database = {
           room_id: string
           user_id: string
           user_name: string | null
-          vote: string | null
+          voted: boolean
         }
         Insert: {
           id?: string
@@ -24,7 +24,7 @@ export type Database = {
           room_id: string
           user_id: string
           user_name?: string | null
-          vote?: string | null
+          voted?: boolean
         }
         Update: {
           id?: string
@@ -32,7 +32,7 @@ export type Database = {
           room_id?: string
           user_id?: string
           user_name?: string | null
-          vote?: string | null
+          voted?: boolean
         }
         Relationships: [
           {
@@ -64,6 +64,45 @@ export type Database = {
           votes_revealed?: boolean
         }
         Relationships: []
+      }
+      vote: {
+        Row: {
+          id: string
+          player_id: string
+          revealed: boolean
+          room_id: string
+          vote: string | null
+        }
+        Insert: {
+          id?: string
+          player_id: string
+          revealed?: boolean
+          room_id: string
+          vote?: string | null
+        }
+        Update: {
+          id?: string
+          player_id?: string
+          revealed?: boolean
+          room_id?: string
+          vote?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "vote_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: true
+            referencedRelation: "player"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vote_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "room"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

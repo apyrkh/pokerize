@@ -1,6 +1,7 @@
-"use client";
+'use client';
+
 import { api } from '@/api-client';
-import { UserDto } from '@/backend';
+import { UserDto } from '@/model';
 import { useState } from 'react';
 
 import styles from './player-entry-gate.module.css'
@@ -11,8 +12,8 @@ type PlayerEntryGateProps = {
 }
 
 export var PlayerEntryGate = ({ roomId, user }: PlayerEntryGateProps) => {
-  var [isLoading, setIsLoading] = useState(false);
-  var [userName, setUserName] = useState(user.name ?? '');
+  var { 0: isLoading, 1: setIsLoading } = useState(false);
+  var { 0: userName, 1: setUserName } = useState(user.name ?? '');
 
   var handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

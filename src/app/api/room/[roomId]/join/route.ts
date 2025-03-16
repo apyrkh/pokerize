@@ -1,4 +1,5 @@
-import { db, PlayerRole, playerToDto, UserDto } from '@/backend';
+import { db } from '@/backend';
+import { PlayerRole, playerToDto, UserDto } from '@/model';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request, { params }: { params: Promise<{ roomId: string }> }) {

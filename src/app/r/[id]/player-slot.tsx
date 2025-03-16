@@ -1,4 +1,4 @@
-import { PlayerDto } from '@/backend'
+import { PlayerDto } from '@/model';
 import { cn } from '@/utils';
 
 import styles from './player-slot.module.css';

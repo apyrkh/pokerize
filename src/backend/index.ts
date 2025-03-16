@@ -1,3 +1,2 @@
 export * from './db';
-export { roomToDto, playerToDto } from './db-mappers';
-export * from './dtos';
+export { roomToDto, playerToDto } from '../model/mappers';

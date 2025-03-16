@@ -1,5 +1,5 @@
-import { Tables } from './db';
-import { PlayerDto, RoomDto } from './dtos';
+import type { PlayerDto, RoomDto } from './api-model';
+import type { Tables } from './db-model';
 
 export var roomToDto = (room: Tables<'room'> & { player: Tables<'player'>[] }): RoomDto => ({
   id: room.id,
@@ -13,5 +13,5 @@ export var playerToDto = (player: Tables<'player'>): PlayerDto => ({
   userId: player.user_id,
   userName: player.user_name,
   role: player.role,
-  vote: player.vote,
+  voted: player.voted,
 })

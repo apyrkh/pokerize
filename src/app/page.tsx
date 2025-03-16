@@ -1,8 +1,8 @@
-import { Footer } from "@/components/footer";
-import { getText } from "@/utils";
-import { GetStartedButton } from "@/components/button";
+import { Footer } from '@/components/footer';
+import { getText } from '@/utils';
+import { GetStartedButton } from '@/components/button';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
 export default function Home() {
   return (
