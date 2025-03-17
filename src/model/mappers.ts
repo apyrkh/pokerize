@@ -10,6 +10,7 @@ export var roomToDto = (room: Tables<'room'> & { player: Tables<'player'>[] }): 
 })
 
 export var playerToDto = (player: Tables<'player'>): PlayerDto => ({
+  roomId: player.room_id,
   userId: player.user_id,
   userName: player.user_name,
   role: player.role,

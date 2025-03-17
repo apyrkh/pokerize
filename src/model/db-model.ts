@@ -11,7 +11,6 @@ export type Database = {
     Tables: {
       player: {
         Row: {
-          id: string
           role: Database["public"]["Enums"]["player_role"]
           room_id: string
           user_id: string
@@ -19,7 +18,6 @@ export type Database = {
           voted: boolean
         }
         Insert: {
-          id?: string
           role: Database["public"]["Enums"]["player_role"]
           room_id: string
           user_id: string
@@ -27,7 +25,6 @@ export type Database = {
           voted?: boolean
         }
         Update: {
-          id?: string
           role?: Database["public"]["Enums"]["player_role"]
           room_id?: string
           user_id?: string
@@ -68,39 +65,39 @@ export type Database = {
       vote: {
         Row: {
           id: string
-          player_id: string
           revealed: boolean
           room_id: string
+          user_id: string
           vote: string | null
         }
         Insert: {
           id?: string
-          player_id: string
           revealed?: boolean
           room_id: string
+          user_id: string
           vote?: string | null
         }
         Update: {
           id?: string
-          player_id?: string
           revealed?: boolean
           room_id?: string
+          user_id?: string
           vote?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "vote_player_id_fkey"
-            columns: ["player_id"]
-            isOneToOne: true
-            referencedRelation: "player"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "vote_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
             referencedRelation: "room"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vote_room_id_user_id_fkey"
+            columns: ["room_id", "user_id"]
+            isOneToOne: true
+            referencedRelation: "player"
+            referencedColumns: ["room_id", "user_id"]
           },
         ]
       }

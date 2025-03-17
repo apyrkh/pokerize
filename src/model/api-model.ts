@@ -9,6 +9,7 @@ export type RoomDto = {
 }
 
 export type PlayerDto = {
+  roomId: string;
   userId: string;
   userName: string | null;
   role: PlayerRoleDto;

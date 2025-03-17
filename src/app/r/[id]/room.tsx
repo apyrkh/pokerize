@@ -21,16 +21,25 @@ export var Room = ({ room, user }: RoomProps) => {
   useEffect(() => {
     var subscribtion = api.subscribePlayers(room.id, (payload) => {
       (
-        (payload.eventType === 'INSERT') && 
-          setPlayers((prev) => prev.concat(playerToDto(payload.new)))
+        (payload.eventType === 'INSERT') &&
+        setPlayers((prev) => {
+          return prev.concat(playerToDto(payload.new));
+        })
       );
-      // (
-      //   payload.eventType === 'UPDATE' &&
-      //     setPlayers((prev) => prev.map((it) => {
-      //       return it.userId === payload.new.user_id ? playerToDto(payload.new) : it;
-      //     }))
-      // )
+      (
+        (payload.eventType === 'UPDATE') &&
+        setPlayers((prev) => prev.map((it) => (
+          it.userId === payload.new.user_id ? playerToDto(payload.new) : it
+        )))
+      );
+      (
+        (payload.eventType === 'DELETE') &&
+        setPlayers((prev) => prev.filter((it) => (
+          it.userId !== payload.old.user_id
+        )))
+      )
     });
+
     return () => {
       subscribtion.unsubscribe();
     }
