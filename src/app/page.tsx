@@ -1,6 +1,6 @@
+import { StartPlaningButton } from '@/components/button';
 import { Footer } from '@/components/footer';
 import { getText } from '@/utils';
-import { GetStartedButton } from '@/components/button';
 
 import styles from './page.module.css';
 
@@ -21,7 +21,7 @@ export default function Home() {
         </section>
 
         <div className={styles.action}>
-          <GetStartedButton />
+          <StartPlaningButton />
         </div>
 
         <section className={styles.features}>

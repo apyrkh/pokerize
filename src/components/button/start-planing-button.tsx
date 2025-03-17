@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { api } from "@/api-client";
-import { getText } from "@/utils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Button } from "./button";
+import { api } from '@/api-client';
+import { getText } from '@/utils';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Button } from './button';
 
-export var GetStartedButton = () => {
+export var StartPlaningButton = () => {
   var router = useRouter();
-  var [loading, setLoading] = useState(false);
+  var { 0: loading, 1: setLoading } = useState(false);
 
   var handleGetStarted = async () => {
     setLoading(true);

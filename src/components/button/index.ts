@@ -1,1 +1,1 @@
-export { GetStartedButton } from './get-started-button';
+export { StartPlaningButton } from './start-planing-button';
