@@ -2,11 +2,13 @@
 DROP TABLE IF EXISTS public.vote;
 DROP TABLE IF EXISTS public.player;
 DROP TABLE IF EXISTS public.room;
+
 DROP TYPE IF EXISTS public.player_role;
 
--- Public
+-- Create DB
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- public.room
 CREATE TABLE public.room (
   id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
   name TEXT,
@@ -23,6 +25,7 @@ CREATE POLICY "Allow select only with WHERE on id"
     SELECT 1 FROM public.room AS t WHERE t.id = public.room.id
   ));
 
+-- public.player
 CREATE TYPE public.player_role AS ENUM ('USER', 'VIEWER');
 
 CREATE TABLE public.player (
@@ -34,6 +37,7 @@ CREATE TABLE public.player (
   PRIMARY KEY (room_id, user_id)
 );
 
+-- public.vote
 CREATE TABLE public.vote (
   id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
   room_id TEXT NOT NULL REFERENCES public.room(id) ON DELETE CASCADE,
