@@ -8,6 +8,7 @@ var supabase = createBrowserClient(
 );
 
 export var api = {
+  // REST app api
   createRoom: async (): Promise<RoomDto> => {
     var res = await fetch('/api/room', {
       method: 'POST',
@@ -27,6 +28,7 @@ export var api = {
     return res.json();
   },
 
+  // supabase api
   subscribePlayers: (roomId: string, callback: (payload: RealtimePostgresChangesPayload<Tables<'player'>>) => void) => {
     return supabase
       .channel(`players_${roomId}`)

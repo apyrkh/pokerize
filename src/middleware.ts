@@ -1,20 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest } from 'next/server';
+import { updateSession } from './backend';
 
-var USER_UUID_COOKIE_NAME = 'uuid';
+export async function middleware(request: NextRequest) {
+  // update user's auth session
+  return await updateSession(request)
+}
 
-export function middleware(req: Request) {
-  var res = NextResponse.next();
-
-  var cookies = req.headers.get("cookie") || "";
-  if (!cookies.includes(USER_UUID_COOKIE_NAME)) {
-    res.cookies.set(USER_UUID_COOKIE_NAME, crypto.randomUUID(), {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-    });
-  }
-
-  return res;
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     */
+    // '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)).*)',
+    '/api/:path*',
+    '/r/:id',
+  ],
 }

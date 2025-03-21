@@ -1,2 +1,3 @@
 export * from './db';
-export { roomToDto, playerToDto } from '../model/mappers';
+export { createSupabaseClient } from './supabase-client';
+export { updateSession } from './supabase-middleware';

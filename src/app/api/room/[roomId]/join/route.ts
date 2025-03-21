@@ -17,16 +17,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ roomId:
       throw new Error('Failed to join room');
     }
 
-    var res = NextResponse.json(playerToDto(player), { status: 201 });
-    res.cookies.set('uName', user.name, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-    });
-
-    return res;
+    return NextResponse.json(playerToDto(player), { status: 201 });
   } catch (error) {
     console.error('Failed to join room', error);
 

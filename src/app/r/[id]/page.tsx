@@ -1,7 +1,6 @@
-import { db } from '@/backend';
+import { createSupabaseClient, db } from '@/backend';
 import { roomToDto, UserDto } from '@/model';
 import { getText } from '@/utils';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound, unauthorized } from 'next/navigation';
 import { Room } from './room';
@@ -16,15 +15,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return notFound();
   }
 
-  var cookieStore = await cookies();
-  var uuidCookie = cookieStore.get('uuid');
-  var userId = uuidCookie?.value;
-  if (!userId) {
+  var supabase = await createSupabaseClient();
+  var { data, error } = await supabase.auth.getUser();
+  var userId = data.user?.id;
+  if (error || !userId) {
     return unauthorized();
   }
-  var uNameCookie = cookieStore.get('uName');
-  var userName = uNameCookie?.value ?? '';
-  var currentUser: UserDto = { id: userId, name: userName };
+
+  var currentUser: UserDto = { id: userId, name: '' };
 
   return (
     <div className={styles.page}>

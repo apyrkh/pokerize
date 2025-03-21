@@ -1,4 +1,5 @@
-import { db, roomToDto } from '@/backend';
+import { db } from '@/backend';
+import { roomToDto } from '@/model';
 import { NextResponse } from 'next/server';
 
 export async function POST() {
