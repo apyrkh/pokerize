@@ -1,6 +1,6 @@
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 import { createBrowserClient } from '@supabase/ssr';
-import type { PlayerDto, RoomDto, Tables, UserDto } from './model';
+import type { PlayerDto, RoomDto, Tables, UpdatePlayerDto } from './model';
 
 var supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,13 +17,13 @@ export var api = {
 
     return res.json();
   },
-  joinRoom: async (roomId: string, user: UserDto): Promise<PlayerDto> => {
-    var res = await fetch(`/api/room/${roomId}/join`, {
+  updatePlayer: async (roomId: string, userId: string, player: UpdatePlayerDto): Promise<PlayerDto> => {
+    var res = await fetch(`/api/player/${roomId}_${userId}`, {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: JSON.stringify(player),
       headers: { 'Content-Type': 'application/json' },
     });
-    if (!res.ok) throw new Error('Failed to join room');
+    if (!res.ok) throw new Error('Failed to update player');
 
     return res.json();
   },

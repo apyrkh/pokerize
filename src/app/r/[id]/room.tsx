@@ -2,6 +2,7 @@
 
 import { api } from '@/api-client';
 import { playerToDto, RoomDto, UserDto } from '@/model';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PlayerEntryGate } from './player-entry-gate';
 import { PlayerSlot } from './player-slot';
@@ -14,9 +15,15 @@ type RoomProps = {
 }
 
 export var Room = ({ room, user }: RoomProps) => {
+  const router = useRouter();
   var { 0: players, 1: setPlayers } = useState(room.players);
+  var player = players.find((it) => it.userId === user.id);
 
-  var isJoint = players.some((it) => it.userId === user.id);
+  useEffect(() => {
+    if (!player) {
+      router.refresh();
+    }
+  }, [player]);
 
   useEffect(() => {
     var subscribtion = api.subscribePlayers(room.id, (payload) => {
@@ -69,8 +76,8 @@ export var Room = ({ room, user }: RoomProps) => {
         <div />
       </div>
 
-      {!isJoint &&
-        <PlayerEntryGate roomId={room.id} user={user} />
+      {player && !player.userName &&
+        <PlayerEntryGate player={player} />
       }
     </div>
   )

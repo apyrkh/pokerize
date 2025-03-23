@@ -1,5 +1,5 @@
 import { createSupabaseClient, db } from '@/backend';
-import { roomToDto, UserDto } from '@/model';
+import { roomToDto, userToDto } from '@/model';
 import { getText } from '@/utils';
 import Link from 'next/link';
 import { notFound, unauthorized } from 'next/navigation';
@@ -9,20 +9,26 @@ import styles from './page.module.css';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   var { id } = await params;
-
-  var room = await db.getRoom(id);
-  if (!room) {
-    return notFound();
-  }
-
   var supabase = await createSupabaseClient();
-  var { data, error } = await supabase.auth.getUser();
-  var userId = data.user?.id;
-  if (error || !userId) {
+
+  var { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
     return unauthorized();
   }
 
-  var currentUser: UserDto = { id: userId, name: '' };
+  var { data: room, error: roomError } = await db.getRoom(id);
+  if (roomError || !room) {
+    return notFound();
+  }
+
+  var player = room.player.find((it) => it.user_id === user!.id);
+  if (!player) {
+    var { data, error: playerError } = await db.insertPlayer({ roomId: id, userId: user!.id, role: 'VIEWER' });
+    if (playerError || !data) {
+      return notFound();
+    }
+    room.player.push(data);
+  }
 
   return (
     <div className={styles.page}>
@@ -34,7 +40,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
       </header>
 
-      <Room room={roomToDto(room)} user={currentUser} />
+      <Room room={roomToDto(room)} user={userToDto(user)} />
     </div>
   )
 }

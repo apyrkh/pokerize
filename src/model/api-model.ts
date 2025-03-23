@@ -1,3 +1,7 @@
+export type UserDto = {
+  id: string;
+}
+
 export type DateString = string;
 
 export type RoomDto = {
@@ -23,7 +27,7 @@ export var PlayerRole = {
   VIEWER: 'VIEWER',
 } as const;
 
-export type UserDto = {
-  id: string;
-  name: string;
+export type UpdatePlayerDto = {
+  userName?: string;
+  role?: PlayerRoleDto;
 }

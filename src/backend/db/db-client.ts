@@ -14,8 +14,7 @@ export var db = {
   },
 
   getRoom: async (id: string) => {
-    var { data, error } = await supabase.from('room').select('*, player(*)').eq('id', id).single();
-    return error ? null : data;
+    return await supabase.from('room').select('*, player(*)').eq('id', id).single();
   },
 
   createRoom: async () => {
@@ -24,24 +23,20 @@ export var db = {
     return data;
   },
 
-  getPlayer: async (roomId: string, userId: string) => {
-    var { data, error } = await supabase
+  insertPlayer: async ({ roomId, userId, userName, role }: { roomId: string; userId: string; userName?: string; role: 'USER' | 'VIEWER' }) => {
+    return await supabase
       .from('player')
-      .select('*')
-      .eq('room_id', roomId)
-      .eq('user_id', userId)
-      .single();
-    if (error) throw error;
-    return data;
-  },
-
-  upsertPlayer: async ({ roomId, userId, userName, role = 'USER' }: { roomId: string; userId: string; userName: string; role?: 'USER' | 'VIEWER' }) => {
-    var { data, error } = await supabase
-      .from('player')
-      .upsert([{ room_id: roomId, user_id: userId, user_name: userName, role }], { onConflict: 'room_id, user_id' })
+      .insert([{ room_id: roomId, user_id: userId, user_name: userName, role }])
       .select()
       .single();
-    if (error) throw error;
-    return data;
+  },
+
+  updatePlayer: async (roomId: string, userId: string, { userName, role }: { userName?: string; role?: 'USER' | 'VIEWER' }) => {
+    return await supabase
+      .from('player')
+      .update({ user_name: userName, role: role })
+      .match({ room_id: roomId, user_id: userId })
+      .select()
+      .single();
   },
 };
