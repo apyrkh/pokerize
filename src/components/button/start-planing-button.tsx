@@ -15,8 +15,6 @@ export var StartPlaningButton = () => {
     try {
       var room = await api.createRoom();
       router.push(`/r/${room.id}`);
-    } catch (error) {
-      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -26,5 +24,5 @@ export var StartPlaningButton = () => {
     <Button type="button" onClick={handleGetStarted} disabled={loading}>
       {getText('b.start_planing')}
     </Button>
-  )
-}
+  );
+};

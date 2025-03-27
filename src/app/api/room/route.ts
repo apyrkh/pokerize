@@ -17,9 +17,7 @@ export async function POST() {
     }
 
     return NextResponse.json(roomToDto(room), { status: 201 });
-  } catch (error) {
-    console.error('Failed to create room', error);
-
+  } catch (_error) {
     return NextResponse.json({ error: 'Failed to create room' }, { status: 500 });
   }
 }

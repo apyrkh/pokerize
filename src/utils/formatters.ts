@@ -6,4 +6,4 @@ var vocabulary = new Map(Object.entries(EN_TEXTS));
 
 export var getText = (key: TextKey) => {
   return vocabulary.get(key) ?? `[[${key}]]`;
-}
+};

@@ -1,9 +1,9 @@
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { updateSession } from './backend';
 
 export async function middleware(request: NextRequest) {
   // update user's auth session
-  return await updateSession(request)
+  return await updateSession(request);
 }
 
 export const config = {
@@ -18,4 +18,4 @@ export const config = {
     '/api/:path*',
     '/r/:id',
   ],
-}
+};

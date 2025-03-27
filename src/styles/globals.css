@@ -1,12 +1,12 @@
 :root {
   --max-width: 1280px;
 
-  --rich-black: #0D1B2A;
-  --oxford-blue: #1B263B;
-  --yln-blue: #415A77;
-  --silver-lake-blue: #778DA9;
-  --platinum: #E0E1DD;
-  --olive-green: #90AC53;
+  --rich-black: #0d1b2a;
+  --oxford-blue: #1b263b;
+  --yln-blue: #415a77;
+  --silver-lake-blue: #778da9;
+  --platinum: #e0e1dd;
+  --olive-green: #90ac53;
   --fern-green: #7f9847;
 
   --base: var(--rich-black);
@@ -21,12 +21,12 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* https://coolors.co/palette/0d1b2a-1b263b-415a77-778da9-e0e1dd */
-    --rich-black: #0D1B2A;
-    --oxford-blue: #1B263B;
-    --yln-blue: #415A77;
-    --silver-lake-blue: #778DA9;
-    --platinum: #E0E1DD;
-    --olive-green: #90AC53;
+    --rich-black: #0d1b2a;
+    --oxford-blue: #1b263b;
+    --yln-blue: #415a77;
+    --silver-lake-blue: #778da9;
+    --platinum: #e0e1dd;
+    --olive-green: #90ac53;
     --fern-green: #7f9847;
 
     --base: var(--rich-black);
@@ -80,7 +80,7 @@ h2 {
   font-size: 1.75rem;
 }
 
-@media(hover) {
+@media (hover) {
   *:focus {
     outline: 2px solid var(--color);
   }

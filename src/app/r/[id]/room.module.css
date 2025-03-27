@@ -21,10 +21,8 @@
 
   height: min(calc(3 * var(--row-max-height) + 2 * var(--gap)), 100%);
   display: grid;
-  grid-template-columns:
-    repeat(6, minmax(var(--col-min-width), var(--col-max-width)));
-  grid-template-rows:
-    repeat(3, minmax(var(--row-min-height), 1fr));
+  grid-template-columns: repeat(6, minmax(var(--col-min-width), var(--col-max-width)));
+  grid-template-rows: repeat(3, minmax(var(--row-min-height), 1fr));
   gap: var(--gap);
 }
 

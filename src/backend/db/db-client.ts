@@ -1,15 +1,19 @@
+import type { Database } from '@/model';
 import { createClient } from '@supabase/supabase-js';
-import { Database } from '@/model';
 
 var supabase = createClient<Database>(
+  // biome-ignore lint/style/noNonNullAssertion: it is required env
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  // biome-ignore lint/style/noNonNullAssertion: it is required env
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 );
 
 export var db = {
   countRooms: async () => {
     var { count, error } = await supabase.from('room').select('*', { count: 'exact', head: true });
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
     return count ?? 0;
   },
 
@@ -19,11 +23,23 @@ export var db = {
 
   createRoom: async () => {
     var { data, error } = await supabase.from('room').insert({}).select('*, player(*)').single();
-    if (error) throw error;
+    if (error) {
+      throw error;
+    }
     return data;
   },
 
-  insertPlayer: async ({ roomId, userId, userName, role }: { roomId: string; userId: string; userName?: string; role: 'USER' | 'VIEWER' }) => {
+  insertPlayer: async ({
+    roomId,
+    userId,
+    userName,
+    role,
+  }: {
+    roomId: string;
+    userId: string;
+    userName?: string;
+    role: 'USER' | 'VIEWER';
+  }) => {
     return await supabase
       .from('player')
       .insert([{ room_id: roomId, user_id: userId, user_name: userName, role }])
@@ -31,7 +47,11 @@ export var db = {
       .single();
   },
 
-  updatePlayer: async (roomId: string, userId: string, { userName, role }: { userName?: string; role?: 'USER' | 'VIEWER' }) => {
+  updatePlayer: async (
+    roomId: string,
+    userId: string,
+    { userName, role }: { userName?: string; role?: 'USER' | 'VIEWER' },
+  ) => {
     return await supabase
       .from('player')
       .update({ user_name: userName, role: role })

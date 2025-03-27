@@ -11,7 +11,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   var { id } = await params;
   var supabase = await createSupabaseClient();
 
-  var { data: { user }, error: authError } = await supabase.auth.getUser();
+  var {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
   if (authError || !user) {
     return unauthorized();
   }
@@ -21,9 +24,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return notFound();
   }
 
-  var player = room.player.find((it) => it.user_id === user!.id);
+  var player = room.player.find((it) => it.user_id === user?.id);
   if (!player) {
-    var { data, error: playerError } = await db.insertPlayer({ roomId: id, userId: user!.id, role: 'VIEWER' });
+    var { data, error: playerError } = await db.insertPlayer({
+      roomId: id,
+      userId: user?.id,
+      role: 'VIEWER',
+    });
     if (playerError || !data) {
       return notFound();
     }
@@ -42,5 +49,5 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
       <Room room={roomToDto(room)} user={userToDto(user)} />
     </div>
-  )
+  );
 }

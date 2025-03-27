@@ -15,9 +15,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <section className={styles.slogan}>
-          <h1>
-            {getText('app.slogan')}
-          </h1>
+          <h1>{getText('app.slogan')}</h1>
         </section>
 
         <div className={styles.action}>
@@ -25,9 +23,7 @@ export default function Home() {
         </div>
 
         <section className={styles.features}>
-          <h2>
-            {getText('app.features')}
-          </h2>
+          <h2>{getText('app.features')}</h2>
         </section>
       </main>
 

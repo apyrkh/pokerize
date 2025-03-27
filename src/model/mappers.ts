@@ -1,10 +1,10 @@
 import type { User } from '@supabase/supabase-js';
 import type { PlayerDto, RoomDto, UserDto } from './api-model';
-import type { Tables } from './db-model';
+import type { Tables } from './__generated__/db-model';
 
 export var userToDto = (user: User): UserDto => ({
   id: user.id,
-})
+});
 
 export var roomToDto = (room: Tables<'room'> & { player: Tables<'player'>[] }): RoomDto => ({
   id: room.id,
@@ -12,7 +12,7 @@ export var roomToDto = (room: Tables<'room'> & { player: Tables<'player'>[] }): 
   players: room.player.map(playerToDto),
   votesRevealed: room.votes_revealed,
   createdAt: room.created_at,
-})
+});
 
 export var playerToDto = (player: Tables<'player'>): PlayerDto => ({
   roomId: player.room_id,
@@ -20,4 +20,4 @@ export var playerToDto = (player: Tables<'player'>): PlayerDto => ({
   userName: player.user_name,
   role: player.role,
   voted: player.voted,
-})
+});

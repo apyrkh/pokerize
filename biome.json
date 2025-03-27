@@ -1,0 +1,27 @@
+{
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "extends": ["./biome-external-config.json"],
+  "files": {
+    "ignore": ["./public/**", "./src/model/__generated__/**"],
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "rules": {
+      "performance": {
+        "noBarrelFile": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "include": ["./next.config.ts", "./src/app/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDefaultExport": "off"
+          }
+        }
+      }
+    }
+  ]
+}

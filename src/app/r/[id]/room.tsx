@@ -1,7 +1,7 @@
 'use client';
 
 import { api } from '@/api-client';
-import { playerToDto, RoomDto, UserDto } from '@/model';
+import { type RoomDto, type UserDto, playerToDto } from '@/model';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PlayerEntryGate } from './player-entry-gate';
@@ -12,7 +12,7 @@ import styles from './room.module.css';
 type RoomProps = {
   room: RoomDto;
   user: UserDto;
-}
+};
 
 export var Room = ({ room, user }: RoomProps) => {
   const router = useRouter();
@@ -23,37 +23,29 @@ export var Room = ({ room, user }: RoomProps) => {
     if (!player) {
       router.refresh();
     }
-  }, [player]);
+  }, [player, router]);
 
   useEffect(() => {
     var subscribtion = api.subscribePlayers(room.id, (payload) => {
-      (
-        (payload.eventType === 'INSERT') &&
+      payload.eventType === 'INSERT' &&
         setPlayers((prev) => {
           return prev.concat(playerToDto(payload.new));
-        })
-      );
-      (
-        (payload.eventType === 'UPDATE') &&
-        setPlayers((prev) => prev.map((it) => (
-          it.userId === payload.new.user_id ? playerToDto(payload.new) : it
-        )))
-      );
-      (
-        (payload.eventType === 'DELETE') &&
-        setPlayers((prev) => prev.filter((it) => (
-          it.userId !== payload.old.user_id
-        )))
-      )
+        });
+      payload.eventType === 'UPDATE' &&
+        setPlayers((prev) =>
+          prev.map((it) => (it.userId === payload.new.user_id ? playerToDto(payload.new) : it)),
+        );
+      payload.eventType === 'DELETE' &&
+        setPlayers((prev) => prev.filter((it) => it.userId !== payload.old.user_id));
     });
 
     return () => {
       subscribtion.unsubscribe();
-    }
-  }, []);
+    };
+  }, [room.id, setPlayers]);
 
   return (
-    <div className={styles.room} >
+    <div className={styles.room}>
       <div className={styles.title}>{room.name ?? room.id}</div>
 
       <div className={styles.stage}>
@@ -65,7 +57,7 @@ export var Room = ({ room, user }: RoomProps) => {
         <div />
 
         <PlayerSlot player={players[8]} />
-        <div className={styles.board}></div>
+        <div className={styles.board} />
         <PlayerSlot player={players[9]} />
 
         <div />
@@ -76,9 +68,7 @@ export var Room = ({ room, user }: RoomProps) => {
         <div />
       </div>
 
-      {player && !player.userName &&
-        <PlayerEntryGate player={player} />
-      }
+      {player && !player.userName && <PlayerEntryGate player={player} />}
     </div>
-  )
-}
+  );
+};

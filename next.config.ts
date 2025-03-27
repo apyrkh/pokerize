@@ -9,6 +9,6 @@ var nextConfig: NextConfig = {
 
 var withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 export default withBundleAnalyzer(nextConfig);

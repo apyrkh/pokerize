@@ -1,8 +1,11 @@
 import { db } from '@/backend';
-import { playerToDto, UpdatePlayerDto } from '@/model';
+import { type UpdatePlayerDto, playerToDto } from '@/model';
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request, { params }: { params: Promise<{ roomId_userId: string }> }) {
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ roomId_userId: string }> },
+) {
   var { roomId_userId } = await params;
   var { 0: roomId, 1: userId } = roomId_userId.split('_');
   var player: UpdatePlayerDto = await req.json();

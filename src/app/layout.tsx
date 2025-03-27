@@ -1,10 +1,10 @@
+import { getText } from '@/utils';
 import type { Metadata } from 'next';
 import Head from 'next/head';
-import { getText } from '@/utils';
+import type { ReactNode } from 'react';
 
 import '@/styles/reset.css';
 import '@/styles/globals.css';
-
 
 export var metadata: Metadata = {
   title: getText('app.name'),
@@ -14,7 +14,7 @@ export var metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -24,9 +24,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

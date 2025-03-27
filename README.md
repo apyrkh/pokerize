@@ -9,4 +9,4 @@ Pokerize: The Planning Poker App
 
 ## Supabase
 
-- `npx supabase gen types typescript --project-id "$PROJECT_ID" --schema public > src/model/db-model.ts`
+- `npx supabase gen types typescript --project-id "$PROJECT_ID" --schema public >| src/model/__generated__/db-model.ts`

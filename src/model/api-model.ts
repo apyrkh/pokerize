@@ -1,6 +1,6 @@
 export type UserDto = {
   id: string;
-}
+};
 
 export type DateString = string;
 
@@ -10,7 +10,7 @@ export type RoomDto = {
   players: PlayerDto[];
   votesRevealed: boolean;
   createdAt: DateString;
-}
+};
 
 export type PlayerDto = {
   roomId: string;
@@ -18,7 +18,7 @@ export type PlayerDto = {
   userName: string | null;
   role: PlayerRoleDto;
   voted: boolean;
-}
+};
 
 export type PlayerRoleDto = (typeof PlayerRole)[keyof typeof PlayerRole];
 
@@ -30,4 +30,4 @@ export var PlayerRole = {
 export type UpdatePlayerDto = {
   userName?: string;
   role?: PlayerRoleDto;
-}
+};

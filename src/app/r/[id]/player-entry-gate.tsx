@@ -1,20 +1,20 @@
 'use client';
 
 import { api } from '@/api-client';
-import { PlayerDto } from '@/model';
-import { useState } from 'react';
+import type { PlayerDto } from '@/model';
+import { type FormEvent, useState } from 'react';
 
-import styles from './player-entry-gate.module.css'
+import styles from './player-entry-gate.module.css';
 
 type PlayerEntryGateProps = {
   player: PlayerDto;
-}
+};
 
 export var PlayerEntryGate = ({ player }: PlayerEntryGateProps) => {
   var { 0: isLoading, 1: setIsLoading } = useState(false);
   var { 0: userName, 1: setUserName } = useState(player.userName ?? '');
 
-  var handleSubmit = async (e: React.FormEvent) => {
+  var handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setIsLoading(true);
@@ -30,11 +30,7 @@ export var PlayerEntryGate = ({ player }: PlayerEntryGateProps) => {
     <form onSubmit={handleSubmit} className={styles.form}>
       <p>Please enter your name to join the room</p>
 
-      <input
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        disabled={isLoading}
-      />
+      <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={isLoading} />
 
       <button type="submit" disabled={isLoading}>
         Join

@@ -8,7 +8,7 @@
   background-color: var(--primary);
   cursor: pointer;
 
-  @media(hover) {
+  @media (hover) {
     & {
       transition: background 0.2s ease-in-out;
     }
