@@ -1,6 +1,6 @@
-import { StartPlaningButton } from '@/components/button';
 import { Footer } from '@/components/footer';
 import { getText } from '@/utils';
+import { StartPlaningButton } from './start-planing-button';
 
 import styles from './page.module.css';
 

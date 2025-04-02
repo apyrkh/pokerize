@@ -15,7 +15,7 @@ type RoomProps = {
 };
 
 export var Room = ({ room, user }: RoomProps) => {
-  const router = useRouter();
+  var router = useRouter();
   var { 0: players, 1: setPlayers } = useState(room.players);
   var player = players.find((it) => it.userId === user.id);
 

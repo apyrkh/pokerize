@@ -1,27 +1,60 @@
 .btn {
+  --btn-padding-block: var(--padding-block, 0.25rem);
+  --btn-padding-inline: var(--padding-inline, 1rem);
+  --btn-color: var(--kind-color);
+  --btn-color_hover: color-mix(in srgb, var(--kind-color) 85%, white);
+
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 1rem 2rem;
-  border: none;
+  padding: var(--btn-padding-block) var(--btn-padding-inline);
+  border: 2px solid var(--btn-color);
   border-radius: 6px;
-  background-color: var(--primary);
+  background-color: var(--btn-color);
   cursor: pointer;
 
   @media (hover) {
     & {
-      transition: background 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     }
 
-    &:active {
-      transform: translateY(.5px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    &:active,
-    &:focus,
     &:hover {
-      background-color: hsl(from var(--primary) h s l / 0.8);
+      border-color: var(--btn-color_hover);
+      background-color: var(--btn-color_hover);
+    }
+
+    &:focus {
+      outline-offset: -2px;
+    }
+  }
+}
+
+.primary {
+  --kind-color: var(--primary);
+}
+
+.secondary {
+  --kind-color: var(--secondary);
+}
+
+.tertiary {
+  --kind-color: var(--primary);
+
+  text-decoration: underline;
+  border-color: transparent;
+  border-radius: 0;
+  color: var(--btn-color);
+  background-color: transparent;
+
+  @media (hover) {
+    & {
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover {
+      color: var(--btn-color_hover);
+      border-color: transparent;
+      background-color: transparent;
     }
   }
 }

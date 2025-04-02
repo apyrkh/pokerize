@@ -1,15 +1,15 @@
 import { cn } from '@/utils';
 import type { ButtonHTMLAttributes } from 'react';
 
-import styles from './button.module.css';
+import css from './button.module.css';
 
-export var Button = ({
-  className,
-  children,
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => {
+type ButtonProps = {
+  kind?: 'primary' | 'secondary' | 'tertiary';
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+export var Button = ({ kind = 'primary', className, children, ...props }: ButtonProps) => {
   return (
-    <button className={cn(styles.btn, className)} {...props}>
+    <button className={cn(className, css.btn, css[kind])} {...props}>
       {children}
     </button>
   );

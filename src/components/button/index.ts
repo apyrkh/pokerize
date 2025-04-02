@@ -1,1 +1,1 @@
-export { StartPlaningButton } from './start-planing-button';
+export { Button } from './button';

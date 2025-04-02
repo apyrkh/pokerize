@@ -1,6 +1,6 @@
 import type { User } from '@supabase/supabase-js';
-import type { PlayerDto, RoomDto, UserDto } from './api-model';
 import type { Tables } from './__generated__/db-model';
+import type { PlayerDto, RoomDto, UserDto } from './api-model';
 
 export var userToDto = (user: User): UserDto => ({
   id: user.id,

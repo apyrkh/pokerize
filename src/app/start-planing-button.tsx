@@ -1,10 +1,12 @@
 'use client';
 
 import { api } from '@/api-client';
+import { Button } from '@/components/button';
 import { getText } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Button } from './button';
+
+import css from './start-planing-button.module.css';
 
 export var StartPlaningButton = () => {
   var router = useRouter();
@@ -21,7 +23,7 @@ export var StartPlaningButton = () => {
   };
 
   return (
-    <Button type="button" onClick={handleGetStarted} disabled={loading}>
+    <Button type="button" className={css.button} onClick={handleGetStarted} disabled={loading}>
       {getText('b.start_planing')}
     </Button>
   );
