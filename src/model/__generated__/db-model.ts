@@ -106,7 +106,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_user_in_room: {
+        Args: {
+          p_room_id: string
+          p_user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       player_role: "USER" | "VIEWER"

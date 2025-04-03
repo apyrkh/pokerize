@@ -1,8 +1,7 @@
 'use client';
 
 import { api } from '@/api-client';
-import { type RoomDto, type UserDto, playerToDto } from '@/model';
-import { useRouter } from 'next/navigation';
+import { type PlayerDto, type RoomDto, type UserDto, playerToDto } from '@/model';
 import { useEffect, useState } from 'react';
 import { PlayerEntryGate } from './player-entry-gate';
 import { PlayerSlot } from './player-slot';
@@ -14,16 +13,19 @@ type RoomProps = {
   user: UserDto;
 };
 
-export var Room = ({ room, user }: RoomProps) => {
-  var router = useRouter();
-  var { 0: players, 1: setPlayers } = useState(room.players);
-  var player = players.find((it) => it.userId === user.id);
+export var Room = ({ room: initialRoom, user }: RoomProps) => {
+  var { 0: room, 1: setRoom } = useState(() => initialRoom);
+  var { 0: players, 1: setPlayers } = useState(() => room.players);
+  var { 0: currentPlayer, 1: setCurrentPlayer } = useState(() => {
+    return players.find((it) => it.userId === user.id) ?? null;
+  });
 
-  useEffect(() => {
-    if (!player) {
-      router.refresh();
-    }
-  }, [player, router]);
+  var handleJoinRoom = async (player: PlayerDto) => {
+    var room = await api.getRoom(player.roomId);
+    setRoom(room);
+    setPlayers(room.players);
+    setCurrentPlayer(player);
+  };
 
   useEffect(() => {
     var subscribtion = api.subscribePlayers(room.id, (payload) => {
@@ -68,7 +70,7 @@ export var Room = ({ room, user }: RoomProps) => {
         <div />
       </div>
 
-      {player && !player.userName && <PlayerEntryGate player={player} />}
+      {!currentPlayer && <PlayerEntryGate room={room} user={user} onJoin={handleJoinRoom} />}
     </div>
   );
 };

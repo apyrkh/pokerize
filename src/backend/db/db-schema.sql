@@ -16,21 +16,12 @@ CREATE TABLE public.room (
   created_at TIMESTAMPTZ DEFAULT now() NOT NULL
 );
 
-ALTER TABLE public.room ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "Allow select only with WHERE on id"
-  ON public.room
-  FOR SELECT
-  USING (EXISTS (
-    SELECT 1 FROM public.room AS t WHERE t.id = public.room.id
-  ));
-
 -- public.player
 CREATE TYPE public.player_role AS ENUM ('USER', 'VIEWER');
 
 CREATE TABLE public.player (
   room_id TEXT NOT NULL REFERENCES public.room(id) ON DELETE CASCADE,
-  user_id TEXT NOT NULL,
+  user_id UUID NOT NULL,
   user_name TEXT,
   role public.player_role NOT NULL,
   voted BOOLEAN DEFAULT FALSE NOT NULL,
@@ -41,7 +32,7 @@ CREATE TABLE public.player (
 CREATE TABLE public.vote (
   id TEXT PRIMARY KEY DEFAULT encode(gen_random_bytes(4), 'hex'),
   room_id TEXT NOT NULL REFERENCES public.room(id) ON DELETE CASCADE,
-  user_id TEXT NOT NULL,
+  user_id UUID NOT NULL,
   vote TEXT,
   revealed BOOLEAN DEFAULT FALSE NOT NULL,
   UNIQUE(room_id, user_id), -- 1 vote per player
@@ -57,4 +48,3 @@ ALTER PUBLICATION supabase_realtime ADD TABLE public.vote;
 -- ALTER TABLE public.room REPLICA IDENTITY FULL;
 -- ALTER TABLE public.player REPLICA IDENTITY FULL;
 -- ALTER TABLE public.vote REPLICA IDENTITY FULL;
-

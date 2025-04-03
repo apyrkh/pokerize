@@ -1,11 +1,11 @@
 import { createBrowserClient } from '@supabase/ssr';
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
-import type { PlayerDto, RoomDto, Tables, UpdatePlayerDto } from './model';
+import type { InsertPlayerDto, PlayerDto, RoomDto, Tables } from './model';
 
 var supabase = createBrowserClient(
-  // biome-ignore lint/style/noNonNullAssertion: it is required env
+  // biome-ignore lint/style/noNonNullAssertion: required env
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  // biome-ignore lint/style/noNonNullAssertion: it is required env
+  // biome-ignore lint/style/noNonNullAssertion: required env
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
 
@@ -21,18 +21,24 @@ export var api = {
 
     return res.json();
   },
-  updatePlayer: async (
-    roomId: string,
-    userId: string,
-    player: UpdatePlayerDto,
-  ): Promise<PlayerDto> => {
-    var res = await fetch(`/api/player/${roomId}_${userId}`, {
+  getRoom: async (id: string): Promise<RoomDto> => {
+    var res = await fetch(`/api/room/${id}`, {
+      method: 'GET',
+    });
+    if (!res.ok) {
+      throw new Error('Failed to create room');
+    }
+
+    return res.json();
+  },
+  joinRoom: async (player: InsertPlayerDto): Promise<PlayerDto> => {
+    var res = await fetch('/api/player', {
       method: 'POST',
       body: JSON.stringify(player),
       headers: { 'Content-Type': 'application/json' },
     });
     if (!res.ok) {
-      throw new Error('Failed to update player');
+      throw new Error('Failed to join room');
     }
 
     return res.json();
@@ -41,7 +47,7 @@ export var api = {
   // supabase api
   subscribePlayers: (
     roomId: string,
-    callback: (payload: RealtimePostgresChangesPayload<Tables<'player'>>) => void,
+    callback: (payload: RealtimePostgresChangesPayload<Tables<'player'>>) => unknown,
   ) => {
     return supabase
       .channel(`players_${roomId}`)

@@ -4,7 +4,11 @@
   "app.slogan": "Pokerize: A fun and engaging planning poker tool for Agile teams",
   "app.features": "Fast. Easy. Fun.",
 
+  "b.join": "Join",
+  "b.spectate": "Spectate",
   "b.start_planing": "Start Planing",
+
+  "p.your_name": "Enter your name",
 
   "t.not_found": "Not Found"
 }

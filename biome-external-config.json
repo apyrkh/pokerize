@@ -30,7 +30,11 @@
         "noInnerDeclarations": "off",
         "useImportExtensions": "off"
       },
+      "performance": {
+        "noBarrelFile": "off"
+      },
       "suspicious": {
+        "noConsole": "off",
         "noReactSpecificProps": "off"
       },
       "style": {

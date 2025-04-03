@@ -5,13 +5,6 @@
     "ignore": ["./public/**", "./src/model/__generated__/**"],
     "ignoreUnknown": true
   },
-  "linter": {
-    "rules": {
-      "performance": {
-        "noBarrelFile": "off"
-      }
-    }
-  },
   "overrides": [
     {
       "include": ["./next.config.ts", "./src/app/**"],

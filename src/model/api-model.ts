@@ -27,7 +27,9 @@ export var PlayerRole = {
   VIEWER: 'VIEWER',
 } as const;
 
-export type UpdatePlayerDto = {
-  userName?: string;
-  role?: PlayerRoleDto;
+export type InsertPlayerDto = {
+  roomId: string;
+  userId: string;
+  userName: string;
+  role: PlayerRoleDto;
 };
